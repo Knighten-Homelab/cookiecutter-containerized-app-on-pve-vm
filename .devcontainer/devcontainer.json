@@ -1,0 +1,20 @@
+{
+	"name": "Homelab - Cookie DEV",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {}
+	},
+	
+	"postCreateCommand": "pip3 install -r requirements.txt",
+
+	"remoteUser": "vscode",
+
+	"remoteEnv": {
+		"USER_UID": "${localEnv:UID}",
+		"USER_GID": "${localEnv:GID}"
+  	},
+
+	"mounts": [
+    	"type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"
+  	]
+}
