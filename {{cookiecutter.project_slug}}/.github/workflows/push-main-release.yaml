@@ -1,0 +1,17 @@
+---
+name: Push To Main - Release
+{% raw %}run-name: Release for Push on ${{ github.ref_name }} ${{ github.run_number }}{% endraw %}
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'CHANGELOG.md'
+
+permissions:
+  contents: read
+
+jobs:
+  semantic-release:
+    uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/semantic-release.yaml@main
