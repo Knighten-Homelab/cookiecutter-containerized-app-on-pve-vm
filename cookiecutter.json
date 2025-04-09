@@ -1,5 +1,16 @@
 {
   "project_name": "Cookiecutter PVE VM Containerized App",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-  "author": "Johnny Knighten"
+  "author": "Johnny Knighten",
+  "tf_backend_key": "{{ cookiecutter.project_slug }}",
+  "tf_module_name": "{{ cookiecutter.project_slug }}",
+  "pve_url": "https://primary.pve.knighten.io:8006/api2/json",
+  "pve_node": "primary",
+  "pve_vm_name": "{{ cookiecutter.project_slug }}",
+  "pve_vm_id": 100,
+  "pve_vm_ip_prod": null,
+  "pve_vm_ip_test": null,
+  "pve_vm_gateway_ip": null,
+  "pve_vm_vlan_tag": 1,
+  "pdns_dns_name": "{{ cookiecutter.project_slug }}"
 }
