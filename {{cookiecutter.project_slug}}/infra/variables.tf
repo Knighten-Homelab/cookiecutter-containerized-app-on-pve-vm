@@ -82,6 +82,11 @@ variable "pdns_url" {
   description = "PowerDNS API URL"
 }
 
+variable "pdns_api_key" {
+  type        = string
+  description = "PowerDNS API key"
+}
+
 variable "dns_record_name" {
   type        = string
   description = "Name of the DNS record to create"

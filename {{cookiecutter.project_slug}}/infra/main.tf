@@ -4,6 +4,7 @@ provider "proxmox" {
 
 provider "powerdns" {
   server_url = var.pdns_url
+  api_key    = var.pdns_api_key
 }
 
 module "{{ cookiecutter.tf_module_name }}" {
