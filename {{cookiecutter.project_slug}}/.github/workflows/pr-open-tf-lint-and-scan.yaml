@@ -1,0 +1,19 @@
+---
+name: Push To Main - Release
+{% raw %}run-name: Release for Push on ${{ github.ref_name }} ${{ github.run_number }}{% endraw %}
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - infra/**
+
+jobs:
+  release:
+    name: Terraform Lint and Security Scan
+    uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/terraform-lint-and-security-scan@main
+    with:
+      infra-directory: infra
