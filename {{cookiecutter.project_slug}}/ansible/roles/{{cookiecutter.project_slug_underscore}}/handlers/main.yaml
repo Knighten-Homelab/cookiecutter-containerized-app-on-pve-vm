@@ -1,0 +1,9 @@
+---
+- name: Compose Up or Restart
+  community.docker.docker_compose_v2:
+    project_src: "{{ '{{ ' }}{{ cookiecutter.project_slug_underscore }}_app_path{{ ' }}' }}"
+    state: present
+    recreate: always
+    pull: missing
+    remove_orphans: true
+  become: true

@@ -1,6 +1,8 @@
 {
   "project_name": "Cookiecutter PVE VM Containerized App",
-  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "project_description": "A template for creating a PVE VM containerized app using Terraform and Ansible.",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+  "project_slug_underscore": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
   "author": "Johnny Knighten",
   "tf_backend_key": "{{ cookiecutter.project_slug }}",
   "tf_module_name": "{{ cookiecutter.project_slug }}",

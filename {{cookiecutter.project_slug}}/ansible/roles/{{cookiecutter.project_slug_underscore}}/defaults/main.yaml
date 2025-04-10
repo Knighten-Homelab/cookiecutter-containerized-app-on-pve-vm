@@ -1,0 +1,2 @@
+---
+{{cookiecutter.project_slug_underscore}}_app_path: /opt/{{cookiecutter.project_slug_underscore}}

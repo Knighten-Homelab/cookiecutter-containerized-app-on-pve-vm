@@ -1,0 +1,15 @@
+awx_target_org: "Homelab"
+awx_target_inv: "Homelab"
+awx_git_credential: "Github - AWX SSH Key"
+awx_project_branch: "main"
+host: "{{ cookiecutter.pve_vm_name }}"
+hostname: "{{ cookiecutter.pdns_dns_name }}.knighten.io"
+host_groups:
+  - "proxmox-hosts"
+  - "ipa-managed-clients"
+job_template_credentials:
+  - Ansible Service Account - Homelab
+  - FreeIPA - Homelab Join Secrets
+ipaclient_domain: homelab.lan
+ipaclient_realm: HOMELAB.LAN
+ipaclient_servers: ipa.homelab.lan

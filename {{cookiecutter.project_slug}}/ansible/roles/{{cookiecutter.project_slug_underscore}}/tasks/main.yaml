@@ -1,0 +1,29 @@
+---
+- name: Create a user for {{ cookiecutter.project_name }}
+  become: true
+  ansible.builtin.user:
+    name: {{ cookiecutter.project_slug_underscore }}
+    comment: User to run {{ cookiecutter.project_name }}
+    create_home: false
+    shell: /bin/false
+  register:
+    user_info
+
+- name: Create directories docker-compose storage
+  become: true
+  ansible.builtin.file:
+    path: "{{ '{{ ' }}{{ cookiecutter.project_slug_underscore }}_app_path{{ ' }}' }}"
+    state: directory
+    owner: cloudflare
+    group: cloudflare
+    mode: "0755"
+
+- name: Create docker-compose file
+  ansible.builtin.template:
+    src: docker-compose.yaml.j2
+    dest: "{{ '{{ ' }}{{ cookiecutter.project_slug_underscore }}_app_path{{ ' }}' }}/docker-compose.yml"
+    owner: {{ cookiecutter.project_slug_underscore }}
+    group: {{ cookiecutter.project_slug_underscore }}
+    mode: "0644"
+  notify:
+    - Compose Up or Restart

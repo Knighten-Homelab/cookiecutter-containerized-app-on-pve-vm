@@ -1,0 +1,86 @@
+---
+- name: Create AWX Resources For {{ cookiecutter.project_name }} Deployment
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Ensure required vars are present
+      ansible.builtin.assert:
+        that:
+          - awx_target_org is defined
+          - awx_target_inv is defined
+          - awx_git_credential is defined
+          - awx_project_branch is defined
+          - host is defined
+          - hostname is defined
+          - host_groups is defined
+          - job_template_credentials is defined
+          - ipaclient_domain is defined
+          - ipaclient_realm is defined
+          - ipaclient_servers is defined
+        fail_msg: "Required variables are missing. Please provide them using --extra-vars."
+
+    - name: Verify that the AWX credentials are provided as environment variables
+      ansible.builtin.fail:
+        msg: AWX credentials are missing. Ensure CONTROLLER_HOST, CONTROLLER_USERNAME, and CONTROLLER_PASSWORD are set as environment variables.
+      when: not (lookup('env', 'CONTROLLER_HOST') and lookup('env', 'CONTROLLER_USERNAME') and lookup('env', 'CONTROLLER_PASSWORD'))
+
+    - name: Create host resource
+      awx.awx.host:
+        name: {% raw %}"{{ host }}"{% endraw %}
+        description: {{ cookiecutter.project_name }} VM
+        inventory: {% raw %}"{{ awx_target_inv }}"{% endraw %}
+        state: present
+        variables:
+          hostname: {% raw %}"{{ hostname }}"{% endraw %}
+
+    - name: Added host to groups
+      awx.awx.group:
+        inventory: {% raw %}"{{ awx_target_inv }}"{% endraw %}
+        preserve_existing_hosts: true
+        preserve_existing_children: true
+        hosts:
+          - {% raw %}"{{ host }}"{% endraw %}
+        name: {% raw %}"{{ item }}"{% endraw %}
+      loop: {% raw %}"{{ host_groups }}"{% endraw %}
+
+    - name: Create project
+      awx.awx.project:
+        name: Homelab - {{ cookiecutter.project_name }}
+        state: present
+        organization: {% raw %}"{{ awx_target_org }}"{% endraw %}
+        scm_type: git
+        scm_url: git@github.com:Knighten-Homelab/vm-{{ cookiecutter.project_slug }}.git
+        scm_branch: {% raw %}"{{ awx_project_branch }}"{% endraw %}
+        scm_update_on_launch: true
+        scm_credential: {% raw %}"{{ awx_git_credential }}"{% endraw %}
+
+    - name: Create deploy job template
+      awx.awx.job_template:
+        name: {{ cookiecutter.project_name }} (Containerized) - Deploy
+        job_type: run
+        inventory: {% raw %}"{{ awx_target_inv }}"{% endraw %}
+        project: Homelab - {{ cookiecutter.project_name }}
+        playbook: ansible/deploy-docker-compose-{{cookiecutter.project_slug}}.yaml
+        become_enabled: true
+        credentials: {% raw %}"{{ job_template_credentials }}"{% endraw %}
+        extra_vars:
+          host: {% raw %}"{{ host }}"{% endraw %}
+          ipaclient_domain: {% raw %}"{{ ipaclient_domain }}"{% endraw %}
+          ipaclient_realm: {% raw %}"{{ ipaclient_realm }}"{% endraw %}
+          ipaclient_servers: {% raw %}"{{ ipaclient_servers }}"{% endraw %}
+
+    - name: Create remove job template
+      awx.awx.job_template:
+        name: {{ cookiecutter.project_name }} (Containerized) - Remove
+        job_type: run
+        inventory: {% raw %}"{{ awx_target_inv }}"{% endraw %}
+        project: Homelab - {{ cookiecutter.project_name }}
+        playbook: ansible/remove-and-clean-docker-compose-{{cookiecutter.project_slug}}.yaml
+        become_enabled: true
+        credentials: {% raw %}"{{ job_template_credentials }}"{% endraw %}
+        extra_vars:
+          host: {% raw %}"{{ host }}"{% endraw %}
+          ipaclient_domain: {% raw %}"{{ ipaclient_domain }}"{% endraw %}
+          ipaclient_realm: {% raw %}"{{ ipaclient_realm }}"{% endraw %}
+          ipaclient_servers: {% raw %}"{{ ipaclient_servers }}"{% endraw %}

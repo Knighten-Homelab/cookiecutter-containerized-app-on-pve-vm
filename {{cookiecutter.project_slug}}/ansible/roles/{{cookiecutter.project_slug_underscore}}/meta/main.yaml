@@ -1,0 +1,13 @@
+galaxy_info:
+  author: {{ cookiecutter.author }}
+  description: {{ cookiecutter.project_description }}
+  company: Knighten Homelab
+  license: Apache-2.0
+  min_ansible_version: "2.17"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+    - name: Debian
+      versions:
+        - bookworm
