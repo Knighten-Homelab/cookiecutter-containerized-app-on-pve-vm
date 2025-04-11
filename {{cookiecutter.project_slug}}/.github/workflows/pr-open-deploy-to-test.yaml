@@ -1,0 +1,24 @@
+---
+name: PR Opened - Deploy To Test
+run-name: Deploying PR {% raw %}${{ github.event.number }}{% endraw %} on {% raw %}${{ github.head_ref }}{% endraw %} To Test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-to-test:
+    name: Deploy To Test
+    uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/terraform-apply-and-deploy-app-via-awx.yaml@main
+    with:
+      VAULT_URL: {% raw %}${{secrets.VAULT_URL_TEST}}{% endraw %}
+      VAULT_TOKEN: {% raw %}${{secrets.VAULT_TOKEN_TEST}}{% endraw %}
+      environment: test
+      awx-resource-creation-script: create-awx-{{cookiecutter.project_slug}}-deployment-resources.yaml
+      awx-deploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Deploy") | urlencode }}
