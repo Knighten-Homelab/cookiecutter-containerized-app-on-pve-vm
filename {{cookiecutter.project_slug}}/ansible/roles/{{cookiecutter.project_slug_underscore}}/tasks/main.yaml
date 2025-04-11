@@ -14,8 +14,8 @@
   ansible.builtin.file:
     path: "{{ '{{ ' }}{{ cookiecutter.project_slug_underscore }}_app_path{{ ' }}' }}"
     state: directory
-    owner: cloudflare
-    group: cloudflare
+    owner: {{ cookiecutter.project_slug_underscore }}
+    group: {{ cookiecutter.project_slug_underscore }}
     mode: "0755"
 
 - name: Create docker-compose file
