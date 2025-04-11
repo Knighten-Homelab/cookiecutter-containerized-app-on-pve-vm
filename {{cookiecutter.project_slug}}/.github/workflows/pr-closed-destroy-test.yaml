@@ -1,6 +1,6 @@
 ---
 name: PR Closed - Destroy Test Environment
-run-name: PR ${{ github.event.number }} Closed Destroying Test Env
+run-name: PR {% raw %}${{ github.event.number }}{% endraw %} Closed Destroying Test Env
 
 on:
   pull_request:
