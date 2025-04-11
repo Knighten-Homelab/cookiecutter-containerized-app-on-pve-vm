@@ -1,0 +1,23 @@
+---
+name: PR Closed - Destroy Test Environment
+run-name: PR ${{ github.event.number }} Closed Destroying Test Env
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  contents: read
+
+jobs:
+  destroy-test:
+    name: Destroy Test Environment
+    uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/terraform-destroy-and-app-cleanup-via-awx.yaml@main
+    with:
+      environment: test
+      awx-resource-creation-script: delete-awx-{{cookiecutter.project_slug}}-deployment-resources.yaml
+      awx-deploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Remove") | urlencode }}
+    secrets:
+      VAULT_URL: {% raw %}${{secrets.VAULT_URL_TEST}}{% endraw %}
+      VAULT_TOKEN: {% raw %}${{secrets.VAULT_TOKEN_TEST}}{% endraw %}
