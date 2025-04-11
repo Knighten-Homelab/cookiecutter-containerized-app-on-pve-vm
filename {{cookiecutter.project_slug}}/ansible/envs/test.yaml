@@ -3,7 +3,7 @@ awx_target_inv: "Homelab"
 awx_git_credential: "Github - AWX SSH Key"
 awx_project_branch: "main"
 host: "{{ cookiecutter.pve_vm_name }}-test"
-hostname: "test.{{ cookiecutter.pdns_dns_name }}.knighten.io"
+hostname: "{{ cookiecutter.pdns_dns_name }}.test.knighten.io"
 host_groups:
   - "proxmox-hosts"
   - "ipa-managed-clients"

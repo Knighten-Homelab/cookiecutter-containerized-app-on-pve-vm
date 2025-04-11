@@ -11,5 +11,5 @@ vm_ci_store_pool="local-zfs"
 vm_disk_store_pool="local-zfs"
 
 pdns_url="http://dns.knighten.io:8080/"
-dns_record_name="test.{{ cookiecutter.pdns_dns_name }}"
+dns_record_name="{{ cookiecutter.pdns_dns_name }}.test"
 dns_zone="knighten.io"

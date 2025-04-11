@@ -33,6 +33,7 @@
         state: present
         variables:
           hostname: {% raw %}"{{ hostname }}"{% endraw %}
+          ansible_host: {% raw %}"{{ host }}"{% endraw %}
 
     - name: Added host to groups
       awx.awx.group:
