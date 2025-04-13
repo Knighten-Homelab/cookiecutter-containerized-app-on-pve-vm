@@ -26,5 +26,5 @@ jobs:
       awx-deploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Deploy") | urlencode }}
       ref: {% raw %}${{ needs.get-latest-tag.outputs.latest-tag }}{% endraw %}
     secrets:
-      VAULT_URL: {% raw %}${{secrets.VAULT_URL_PROD}}{% endraw %}
-      VAULT_TOKEN: {% raw %}${{secrets.VAULT_TOKEN_PROD}}{% endraw %}
+      VAULT_URL: {% raw %}${{secrets.VAULT_URL }}{% endraw %}
+      VAULT_TOKEN: {% raw %}${{secrets.VAULT_TOKEN }}{% endraw %}
