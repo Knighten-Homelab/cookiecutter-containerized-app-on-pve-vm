@@ -35,8 +35,8 @@ jobs:
       awx-deploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Deploy") | urlencode }}
       ref: {% raw %}${{ github.event.inputs.releaseRef }}{% endraw %}
     secrets:
-      VAULT_URL: {% raw %}${{github.event.inputs.environment == 'test' ? secrets.VAULT_URL_TEST : secrets.VAULT_URL }}{% endraw %}
-      VAULT_TOKEN: {% raw %}${{{github.event.inputs.environment == 'test' ? secrets.VAULT_TOKEN_TEST : secrets.VAULT_TOKEN }}{% endraw %}
+      VAULT_URL: {% raw %}${{ github.event.inputs.environment == 'test' && secrets.VAULT_URL_TEST || secrets.VAULT_URL }}{% endraw %}
+      VAULT_TOKEN: {% raw %}${{ github.event.inputs.environment == 'test' && secrets.VAULT_TOKEN_TEST || secrets.VAULT_TOKEN }}{% endraw %}
 
   destroy:
     name: Manual Destroy
@@ -48,5 +48,5 @@ jobs:
       awx-undeploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Remove") | urlencode }}
       ref: {% raw %}${{ github.event.inputs.releaseRef }}{% endraw %}
     secrets:
-      VAULT_URL: {% raw %}${{github.event.inputs.environment == 'test' ? secrets.VAULT_URL_TEST : secrets.VAULT_URL }}{% endraw %}
-      VAULT_TOKEN: {% raw %}${{{github.event.inputs.environment == 'test' ? secrets.VAULT_TOKEN_TEST : secrets.VAULT_TOKEN }}{% endraw %}
+      VAULT_URL: {% raw %}${{ github.event.inputs.environment == 'test' && secrets.VAULT_URL_TEST || secrets.VAULT_URL }}{% endraw %}
+      VAULT_TOKEN: {% raw %}${{ github.event.inputs.environment == 'test' && secrets.VAULT_TOKEN_TEST || secrets.VAULT_TOKEN }}{% endraw %}
