@@ -1,6 +1,6 @@
 ---
 name: Manual - Deploy/Destroy Environment
-run-name: Manual ${{ github.event.inputs.actionSelection }} On ${{ github.event.inputs.environment }} Using ${{ github.event.inputs.releaseRef }}
+run-name: {% raw %}Manual ${{ github.event.inputs.actionSelection }} On ${{ github.event.inputs.environment }} Using ${{ github.event.inputs.releaseRef }}{% endraw %}
 
 on:
   workflow_dispatch:
@@ -27,26 +27,26 @@ on:
 jobs:
   deploy:
     name: Manual Deploy
-    if: ${{ github.event.inputs.actionSelection == 'Deploy'}}
+    if: {% raw %}${{ github.event.inputs.actionSelection == 'Deploy'}}{% endraw %}
     uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/terraform-apply-and-deploy-app-via-awx.yaml@main
     with:
-      environment: ${{ github.event.inputs.environment }}
+      environment: {% raw %}${{ github.event.inputs.environment }}{% endraw %}
       awx-resource-creation-script: create-awx-{{cookiecutter.project_slug}}-deployment-resources.yaml
       awx-deploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Deploy") | urlencode }}
-      ref: ${{ github.event.inputs.releaseRef }}
+      ref: {% raw %}${{ github.event.inputs.releaseRef }}{% endraw %}
     secrets:
       VAULT_URL: {% raw %}${{github.event.inputs.environment == 'test' ? secrets.VAULT_URL_TEST : secrets.VAULT_URL }}{% endraw %}
       VAULT_TOKEN: {% raw %}${{{github.event.inputs.environment == 'test' ? secrets.VAULT_TOKEN_TEST : secrets.VAULT_TOKEN }}{% endraw %}
 
   destroy:
     name: Manual Destroy
-    if: ${{ github.event.inputs.actionSelection == 'Destroy'}}
+    if: {% raw %}${{ github.event.inputs.actionSelection == 'Destroy'}}{% endraw %}
     uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/terraform-destroy-and-app-cleanup-via-awx.yaml@main
     with:
-      environment: ${{ github.event.inputs.environment }}
+      environment: {% raw %}${{ github.event.inputs.environment }}{% endraw %}
       awx-resource-deletion-script: delete-awx-{{cookiecutter.project_slug}}-deployment-resources.yaml
       awx-undeploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Remove") | urlencode }}
-      ref: ${{ github.event.inputs.releaseRef }}
+      ref: {% raw %}${{ github.event.inputs.releaseRef }}{% endraw %}
     secrets:
       VAULT_URL: {% raw %}${{github.event.inputs.environment == 'test' ? secrets.VAULT_URL_TEST : secrets.VAULT_URL }}{% endraw %}
       VAULT_TOKEN: {% raw %}${{{github.event.inputs.environment == 'test' ? secrets.VAULT_TOKEN_TEST : secrets.VAULT_TOKEN }}{% endraw %}

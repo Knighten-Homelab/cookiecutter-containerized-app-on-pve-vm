@@ -12,7 +12,7 @@ on:
       - infra/**
 
 jobs:
-  release:
+  lint-and-scan:
     name: Terraform Lint and Security Scan
     uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/terraform-lint-and-security-scan.yaml@main
     with:
