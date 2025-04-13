@@ -1,0 +1,19 @@
+---
+name: PR Opened - Lint - Ansible
+run-name: Ansible Change Detected In PR {% raw %}${{ github.event.number }} on ${{ github.head_ref }}{% endraw %} - Lint
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - ansible/**
+
+jobs:
+  lint:
+    name: Ansible Lint
+    uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/ansible-lint.yaml@main
+    with:
+      ansible-directory: ansible
