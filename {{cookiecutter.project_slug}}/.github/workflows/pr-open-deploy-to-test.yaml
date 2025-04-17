@@ -18,7 +18,7 @@ jobs:
     uses: Knighten-Homelab/gha-reusable-workflows/.github/workflows/terraform-apply-and-deploy-app-via-awx.yaml@main
     with:
       environment: test
-      awx-resource-creation-script: create-awx-{{cookiecutter.project_slug}}-deployment-resources.yaml
+      awx-resource-creation-playbook: create-awx-{{cookiecutter.project_slug}}-deployment-resources.yaml
       awx-deploy-template-name: {{ (cookiecutter.project_name ~ " (Containerized) - Deploy") | urlencode }}
     secrets:
       VAULT_URL: {% raw %}${{secrets.VAULT_URL_TEST}}{% endraw %}
