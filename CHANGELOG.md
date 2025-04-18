@@ -1,0 +1,36 @@
+## [1.0.0](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/compare/...1.0.0) (2025-04-18)
+
+### Bug Fixes
+
+* added raw tags around github action var ([78f0fac](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/78f0facca25968c63cd663439a7d1c292c5ae725))
+* added raw/endraw tags to manual deploy/destroy gha ([6497eac](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/6497eac122cf127e9327e187094b9c8bc86834ba))
+* added space to bottom of ansible default file ([ad25e0e](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/ad25e0ecb133f29fbe3cf216658f02c6e1cff3bf))
+* cleanedup dns names and ansible collection reqs ([a758ed0](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/a758ed02245753cfa9ea194ef4ea38da1c497b40))
+* correct owner/group for docker compose path ([e8a1a9f](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/e8a1a9faf4b7d0732b8fc918d997c583a74d00e8))
+* correct ref to resuable gha for release ([bb7a225](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/bb7a2250b386c68be2d8a4f3d10cc1df0710b976))
+* corrected git url for ansible common roles ([5debd47](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/5debd47ebdee2d0ab3ab44da1f3a9fcf5fc526d0))
+* corrected missing tf variable causing validate failure ([7215556](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/72155566606bf2619f931b4f4b2e013c7d733349))
+* corrected secrets block in deploy gha ([7c0fa81](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/7c0fa81425d9cd822618939fe25b8d1be96d66cd))
+* corrected var names used in delete gha ([87f5336](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/87f5336933a997c8da030f6d47de303d4f68ef4f))
+* corredt ansible_host var for host ([0d523dd](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/0d523ddd4808db6bc69237b0bf7372a05aa226f0))
+* made new release gha use correct prod creds ([3adbd8d](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/3adbd8dffc2f67fd68599e894a238f0c2693a25b))
+* README overhaul ([57cd195](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/57cd195367a80ff40a6c546138c4ef1bf230d480))
+* switched default image from whalesay to hello-world ([32e7641](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/32e7641a8931f3016c88f138aa472dd897925c98))
+* updated ansible gha script var to be named playbook ([93cd25c](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/93cd25c34f0e70fed933447f56b5e8aa01fa1b7e))
+* updated deploy to prod gha to grab latest tag ([c787df3](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/c787df333c6dd6f93052fcbf7a962846bc89b4bd))
+* went back to streamlined manual deploy/destroy gha flow ([88abcd0](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/88abcd0bf50bf61c4d3ecbaa8e2643af5de1a583))
+
+### Features
+
+* added ansible code generation to template ([1e4822a](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/1e4822a33838effbdcaf9df33f10970101117963))
+* added gha to deploy to prod on new release ([e47c7dd](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/e47c7dd6c513895224f7956f81840ccb824e9241))
+* added gha to deploy to test on pr open ([a27a283](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/a27a2831f514f173daeda9a6ea2d5fa22e3592b1))
+* added gha to destroy test env on pr close ([39ac9a1](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/39ac9a14fd0345c82b65c96763f338ab03f2f155))
+* added gha to handle semver release ([0fd602d](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/0fd602d5b0c1aea7fd6cb922bb84a3966e519d3e))
+* added gha to lint ansible on ansible code change in pr ([488a23b](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/488a23b728fd43fc9e907b17d9e7ae42a764dabb))
+* added gha to manually deploy/destroy environments ([c7e225d](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/c7e225dd06ec5255c400f18da5a20ae1f5eb8019))
+* added push-main-release gha ([62c73b1](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/62c73b1acd18cf0fdffe87c4fbc26de34a7df9b3))
+* added README to template ([895b1c9](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/895b1c9b0b0c5ba884a13fae6448287b22976b63))
+* added tf code to template ([2ec0dd3](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/2ec0dd38d7c4b750c4fbd2291f6c21e47216bc68))
+* added tf lint and scan gha ([8c81138](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/8c8113871bf457ea47ac6a26d4c58f501fbf679c))
+* template init with devcontainer ([2102b75](https://github.com/Knighten-Homelab/cookiecutter-containerized-app-on-pve-vm/commit/2102b754fc01d6d234ae628ac2a280e843ec2621))
